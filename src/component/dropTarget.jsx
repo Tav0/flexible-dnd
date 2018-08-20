@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { registerDropTarget, unregisterDropTarget } from '../store/actionCreators';
 
@@ -93,7 +94,7 @@ export default function DropTarget(Component, config) {
 
   Object.assign(dropTarget, {
     contextTypes: {
-      __dragDropStore: React.PropTypes.object.isRequired
+      __dragDropStore: PropTypes.object.isRequired
     },
     displayName: `DragSource(${Component.displayName || 'Component'})`
   });

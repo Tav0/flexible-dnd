@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { createStore } from 'redux';
 
 import dragDropReducer from '../store/dragDropReducer';
@@ -135,7 +136,7 @@ export default function DragDropContext(Component) {
 
   Object.assign(dragDropContext, {
     childContextTypes: {
-      __dragDropStore: React.PropTypes.object.isRequired
+      __dragDropStore: PropTypes.object.isRequired
     },
     displayName: `DragDropContext(${Component.displayName || 'Component'})`
   });

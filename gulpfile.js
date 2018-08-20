@@ -12,11 +12,11 @@ gulp.task('constants', function () {
     .pipe(gulp.dest('lib'));
 });
 
-gulp.task('build', [ 'constants' ], function () {
+gulp.task('build', gulp.series('constants', function () {
   return gulp.src('src/**/*.js?(x)')
     .pipe(babel())
     .pipe(gulp.dest('lib'));
-});
+}));
 
 gulp.task('lint', function () {
   return gulp.src('src/**/*.js?(x)')
@@ -39,7 +39,7 @@ gulp.task('default', function (callback) {
   sequence('lint', 'build', 'test', callback);
 });
 
-gulp.task('example', [ 'default' ], function () {
+gulp.task('example', gulp.series('default', function () {
   return browserify('example/src/app.jsx', {
     extensions: [ '.jsx', '.js' ],
     debug: true
@@ -48,9 +48,9 @@ gulp.task('example', [ 'default' ], function () {
     .bundle()
     .pipe(source('example.js'))
     .pipe(gulp.dest('example/lib'));
-});
+}));
 
-gulp.task('watch', [ 'default' ], function() {
+gulp.task('watch', gulp.series('default', function() {
   gulp.watch('src/**/*.+(js|jsx|json)', function () {
     gulp.run('default');
   });
@@ -58,4 +58,4 @@ gulp.task('watch', [ 'default' ], function() {
   gulp.watch('__tests__/**/*.js?(x)', function () {
     gulp.run('test');
   });
-});
+}));

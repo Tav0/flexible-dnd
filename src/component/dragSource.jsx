@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { dragStartAction } from '../store/actionCreators';
 
@@ -103,7 +104,7 @@ export default function DragSource(Component) {
 
   Object.assign(dragSource, {
     contextTypes: {
-      __dragDropStore: React.PropTypes.object.isRequired
+      __dragDropStore: PropTypes.object.isRequired
     },
     displayName: `DragSource(${Component.displayName || 'Component'})`
   });
